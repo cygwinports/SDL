@@ -1,0 +1,65 @@
+DESCRIPTION="Simple DirectMedia Layer library"
+HOMEPAGE="http://www.libsdl.org/"
+SRC_URI="http://www.libsdl.org/release/${P}.tar.gz"
+PATCH_URI="
+	mirror://portage/media-libs/libsdl/files/libsdl-1.2.13-libcaca-new-api.patch
+	mirror://portage/media-libs/libsdl/files/libsdl-1.2.11-sdl-config.patch
+	mirror://portage/media-libs/libsdl/files/libsdl-1.2.11-xinerama-head-0.patch
+	mirror://portage/media-libs/libsdl/files/libsdl-1.2.13-pulseaudio.patch
+	mirror://portage/media-libs/libsdl/files/libsdl-1.2.13-cld.patch
+	1.2.13-cygwin.patch
+"
+
+PKG_NAMES="${PN} libSDL1.2_0 libSDL-devel"
+libSDL1_2_0_CONTENTS="usr/bin/cygSDL-1-2-0.dll usr/share/doc/"
+libSDL_devel_CONTENTS="usr/bin/sdl-config usr/include/ usr/lib/
+                       usr/share/aclocal/ usr/share/man/man3/"
+
+DIFF_EXCLUDES="acinclude.m4 SDL_config.h"
+
+CYGCONF_ARGS="
+	--enable-pthreads
+	--enable-pthread-sem
+	--enable-sdl-dlopen
+
+	--disable-arts
+	--disable-esd
+	--disable-nas
+	--enable-oss
+	--disable-pulseaudio
+
+	--disable-dga
+	--disable-video-aalib
+	--disable-video-caca
+	--disable-video-dga
+	--enable-video-dummy
+	--disable-video-ggi
+	--enable-video-opengl
+	--enable-video-x11
+	--disable-video-x11-dgamouse
+	--disable-video-x11-dpms
+	--disable-video-x11-vm
+	--disable-video-x11-xinerama
+	--disable-video-x11-xme
+	--enable-video-x11-xrandr
+	--disable-video-x11-xv
+
+	--disable-arts-shared
+	--disable-esd-shared
+	--disable-pulseaudio-shared
+	--enable-x11-shared
+"
+
+src_compile() {
+	cd ${S}
+	# remove old libtool macros
+	sed -e '/^\# libtool\.m4/,$d' -i acinclude.m4
+	# SDL doesn't use autoheader
+	NO_AUTOHEADER=1 cygautoreconf
+
+	cd ${B}
+	cygconf	# already defined CYGCONF_ARGS
+	cygmake
+}
+
+DOCS="README-SDL.txt README.Porting README.SVN"
