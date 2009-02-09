@@ -7,7 +7,7 @@ OpenGL, and 2D framebuffer across multiple platforms.
 Runtime requirements:
   cygwin-1.5.25-15
   libGL1-7.2-2
-  libX11_6-1.1.5-1
+  libX11_6-1.1.5-2
   libXext6-1.0.4-1
   libXrandr2-1.2.3-1
 
@@ -288,6 +288,9 @@ Files included in the binary packages:
 ------------------
 
 Port Notes:
+
+----- version 1.2.13-3 -----
+Enabled Xinerama support.
 
 ----- version 1.2.13-2 -----
 Enabled dlopen() usage of X11 libraries.
