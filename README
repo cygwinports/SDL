@@ -5,25 +5,26 @@ level access to audio, keyboard, mouse, joystick, 3D hardware via
 OpenGL, and 2D framebuffer across multiple platforms.
 
 Runtime requirements:
-  cygwin-1.5.25-15
-  libGL1-7.2-2
-  libX11_6-1.1.5-2
-  libXext6-1.0.4-1
-  libXrandr2-1.2.3-1
+  cygwin-1.7.0-44
+  libgcc1-4.3.2-2
+  libGL1-7.2-10
+  libX11_6-1.2-10
+  libXext6-1.0.5-10
+  libXrandr2-1.3.0-10
 
 Build requirements:
 (besides corresponding devel packages)
-  autoconf2.5-2.63-1
-  automake1.10-1.10.1-2
+  autoconf2.5-2.63-10
+  automake1.10-1.10.1-10
   binutils-20080624-2
-  cygport-0.4.3-1
-  gawk-3.1.6-1
-  gcc-core-3.4.4-3
-  libtool-2.2.6a-1
-  make-3.81-1
+  cygport-0.9.6-1
+  gawk-3.1.6-2
+  gcc4-core-4.3.2-2
+  libtool-2.2.6a-2
+  make-3.81-2
   sed-4.1.5-2
-  w32api-3.12-1
-  yasm-0.7.2-1
+  w32api-3.13-1
+  yasm-0.7.2-10
 
 Canonical homepage:
   http://www.libsdl.org/
@@ -51,16 +52,15 @@ Files included in the binary packages:
 
 (libSDL1.2_0)
   /usr/bin/cygSDL-1-2-0.dll
-  /usr/share/doc/SDL-1.2.13/BUGS
-  /usr/share/doc/SDL-1.2.13/COPYING
-  /usr/share/doc/SDL-1.2.13/CREDITS
-  /usr/share/doc/SDL-1.2.13/INSTALL
-  /usr/share/doc/SDL-1.2.13/README
-  /usr/share/doc/SDL-1.2.13/README-SDL.txt
-  /usr/share/doc/SDL-1.2.13/README.Porting
-  /usr/share/doc/SDL-1.2.13/README.SVN
-  /usr/share/doc/SDL-1.2.13/TODO
-  /usr/share/doc/SDL-1.2.13/WHATSNEW
+  /usr/share/doc/SDL/BUGS
+  /usr/share/doc/SDL/COPYING
+  /usr/share/doc/SDL/CREDITS
+  /usr/share/doc/SDL/README
+  /usr/share/doc/SDL/README-SDL.txt
+  /usr/share/doc/SDL/README.Porting
+  /usr/share/doc/SDL/README.SVN
+  /usr/share/doc/SDL/TODO
+  /usr/share/doc/SDL/WHATSNEW
 
 (libSDL-devel)
   /usr/bin/sdl-config
@@ -289,33 +289,8 @@ Files included in the binary packages:
 
 Port Notes:
 
------ version 1.2.13-3 -----
-Enabled Xinerama support.
-
------ version 1.2.13-2 -----
-Enabled dlopen() usage of X11 libraries.
-
------ version 1.2.13-1 -----
-Version bump.
-
------ version 1.2.12-1 -----
-Version bump.
-
------ version 1.2.11-1 -----
-Version bump, built with cygport.
-
------ version 1.2.9-1 -----
-Version bump.
-
------ version 1.2.8-1 -----
-Version bump, built for the X11 GUI.
-
------ version 1.2.7-2 -----
-Rebuilt to fix prototype declaration compile errors in apps with main() 
-functions not conforming to the Win32 SDL_main rules.
-
------ version 1.2.7-1 -----
-Initial release for Cygwin.
+----- version 1.2.13-10 -----
+Initial release for Cygwin 1.7.
 
 
 Cygwin port maintained by:
