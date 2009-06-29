@@ -1,5 +1,5 @@
 category: X11 Audio
-requires: cygwin libSDL1.2_0
+requires: libSDL1.2_0
 external-source: SDL
 sdesc: "Simple DirectMedia Layer (development)"
 ldesc: "This is the Simple DirectMedia Layer, a general API that 

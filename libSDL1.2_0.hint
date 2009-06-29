@@ -1,5 +1,5 @@
 category: X11 Audio
-requires: cygwin libgcc1 libGL1 libX11_6 libXext6 libXrandr2 libXrender1
+requires: libgcc1 libGL1 libX11_6 libXext6 libXrandr2 libXrender1
 external-source: SDL
 sdesc: "Simple DirectMedia Layer (runtime)"
 ldesc: "This is the Simple DirectMedia Layer, a general API that 
