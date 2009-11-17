@@ -1,15 +1,6 @@
---- origsrc/SDL-1.2.13/configure.in	2008-12-23 01:45:26.709250000 -0600
-+++ src/SDL-1.2.13/configure.in	2008-12-23 01:44:56.000000000 -0600
-@@ -40,7 +40,7 @@
- AC_SUBST(LT_AGE)
- 
- dnl Detect the canonical build and host environments
--AC_CONFIG_AUX_DIRS($srcdir/build-scripts)
-+AC_CONFIG_AUX_DIR(build-scripts)
- AC_CANONICAL_HOST
- AC_C_BIGENDIAN
- if test x$ac_cv_c_bigendian = xyes; then
-@@ -60,11 +60,6 @@
+--- origsrc/SDL-1.2.14/configure.in	2009-10-17 12:35:03.000000000 -0500
++++ src/SDL-1.2.14/configure.in	2009-11-17 00:56:58.602877400 -0600
+@@ -77,11 +77,6 @@ if test x$srcdir != x.; then
      INCLUDE="-Iinclude $INCLUDE"
  fi
  case "$host" in
@@ -21,7 +12,7 @@
      *)
          BASE_CFLAGS="-D_GNU_SOURCE=1"
          BASE_LDFLAGS=""
-@@ -131,7 +126,7 @@
+@@ -157,7 +152,7 @@ if test x$enable_libc = xyes; then
  
      dnl Checks for library functions.
      case "$host" in
@@ -30,37 +21,7 @@
          ;;
      *)
          AC_FUNC_ALLOCA
-@@ -452,9 +447,14 @@
-             AC_ARG_ENABLE(esd-shared,
- AC_HELP_STRING([--enable-esd-shared], [dynamically load ESD audio support [[default=yes]]]),
-                           , enable_esd_shared=yes)
-+            case "$host" in
-+                *-*-cygwin*) esd_lib='cygesd-0.dll' ;;
-+                *)
-             esd_lib_spec=`echo $ESD_LIBS | sed 's/.*-L\([[^ ]]*\).*/\1\/libesd.so.*/'`
-             esd_lib=`ls -- $esd_lib_spec | sed 's/.*\/\(.*\)/\1/; q'`
-             echo "-- $esd_lib_spec -> $esd_lib"
-+                ;;
-+            esac
- 
-             AC_DEFINE(SDL_AUDIO_DRIVER_ESD)
-             SOURCES="$SOURCES $srcdir/src/audio/esd/*.c"
-@@ -561,9 +561,14 @@
-                 AC_ARG_ENABLE(arts-shared,
- AC_HELP_STRING([--enable-arts-shared], [dynamically load aRts audio support [[default=yes]]]),
-                               , enable_arts_shared=yes)
-+                case "$host" in
-+                    *-*-cygwin*) arts_lib='cygartsc-0.dll' ;;
-+                    *)
-                 arts_lib_spec="$ARTS_PREFIX/lib/libartsc.so.*"
-                 arts_lib=`ls -- $arts_lib_spec | sed 's/.*\/\(.*\)/\1/; q'`
-                 echo "-- $arts_lib_spec -> $arts_lib"
-+                        ;;
-+                esac
- 
-                 AC_DEFINE(SDL_AUDIO_DRIVER_ARTS)
-                 SOURCES="$SOURCES $srcdir/src/audio/arts/*.c"
-@@ -697,7 +702,7 @@
+@@ -730,7 +725,7 @@ AC_HELP_STRING([--enable-nasm], [use nas
  
          if test x"$NASMFLAGS" = x; then
              case $ARCH in
@@ -69,7 +30,7 @@
                    NASMFLAGS="-f win32"
                    ;;
                openbsd)
-@@ -930,6 +935,13 @@
+@@ -965,6 +960,13 @@ AC_HELP_STRING([--enable-x11-shared], [d
                            , enable_x11_shared=maybe)
  
              case "$host" in
@@ -83,7 +44,7 @@
                  *-*-darwin*) # Latest Mac OS X actually ships with Xrandr/Xrender libs...
                      x11_symbols_private=yes
                      x11_lib='/usr/X11R6/lib/libX11.6.dylib'
-@@ -2417,7 +2429,7 @@
+@@ -2453,7 +2455,7 @@ case "$host" in
              have_timers=yes
          fi
          ;;
@@ -92,7 +53,7 @@
          ARCH=win32
          if test "$build" != "$host"; then # cross-compiling
              # Default cross-compile location
-@@ -2489,6 +2501,44 @@
+@@ -2525,6 +2527,44 @@ case "$host" in
          SDL_CFLAGS="$SDL_CFLAGS -Dmain=SDL_main"
          SDL_LIBS="-lmingw32 -lSDLmain $SDL_LIBS -mwindows"
          ;;
@@ -134,12 +95,12 @@
 +        # Set up the system libraries we need
 +        EXTRA_LDFLAGS="$EXTRA_LDFLAGS -lwinmm"
 +        ;;
-     *-*-beos*)
-         ARCH=beos
-         ac_default_prefix=/boot/develop/tools/gnupro
---- origsrc/SDL-1.2.13/include/SDL_platform.h	2008-12-23 01:45:26.740500000 -0600
-+++ src/SDL-1.2.13/include/SDL_platform.h	2008-12-23 01:44:56.000000000 -0600
-@@ -37,6 +37,10 @@
+     *-wince*)
+         ARCH=win32
+         CheckDummyVideo
+--- origsrc/SDL-1.2.14/include/SDL_platform.h	2009-10-12 18:07:19.000000000 -0500
++++ src/SDL-1.2.14/include/SDL_platform.h	2009-11-17 00:56:58.602877400 -0600
+@@ -43,6 +43,10 @@
  #undef __BSDI__
  #define __BSDI__	1
  #endif
@@ -150,8 +111,8 @@
  #if defined(_arch_dreamcast)
  #undef __DREAMCAST__
  #define __DREAMCAST__	1
---- origsrc/SDL-1.2.13/src/video/x11/SDL_x11gl.c	2008-12-23 01:45:26.756125000 -0600
-+++ src/SDL-1.2.13/src/video/x11/SDL_x11gl.c	2008-12-23 01:44:56.000000000 -0600
+--- origsrc/SDL-1.2.14/src/video/x11/SDL_x11gl.c	2009-10-17 02:45:42.000000000 -0500
++++ src/SDL-1.2.14/src/video/x11/SDL_x11gl.c	2009-11-17 00:56:58.602877400 -0600
 @@ -35,6 +35,8 @@
  #define DEFAULT_OPENGL	"libGL.so.3"
  #elif defined(__OpenBSD__)
