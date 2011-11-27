@@ -12,8 +12,10 @@ libSDL1_2_0_CONTENTS="usr/bin/cygSDL-1-2-0.dll usr/share/doc/"
 libSDL_devel_CONTENTS="usr/bin/sdl-config usr/include/ usr/lib/
                        usr/share/aclocal/ usr/share/man/man3/"
 
-DIFF_EXCLUDES="acinclude.m4 SDL_config.h"
+DISTCLEANFILES="acinclude/l*.m4"
+DIFF_EXCLUDES="SDL_config.h"
 
+ACLOCAL_FLAGS="-I acinclude"
 NO_AUTOHEADER=1
 CYGCONF_ARGS="
 	--enable-pthreads
@@ -22,9 +24,9 @@ CYGCONF_ARGS="
 
 	--disable-arts
 	--disable-esd
-	--disable-nas
+	--enable-nas
 	--enable-oss
-	--disable-pulseaudio
+	--enable-pulseaudio
 
 	--disable-dga
 	--disable-video-aalib
@@ -43,7 +45,8 @@ CYGCONF_ARGS="
 
 	--disable-arts-shared
 	--disable-esd-shared
-	--disable-pulseaudio-shared
+	--enable-nas-shared
+	--enable-pulseaudio-shared
 	--enable-x11-shared
 "
 
