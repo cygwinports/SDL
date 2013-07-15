@@ -1,16 +1,27 @@
-DESCRIPTION="Simple DirectMedia Layer library"
+NAME="SDL"
+VERSION=1.2.15
+RELEASE=2
+CATEGORY="Libs"
+SUMMARY="Simple DirectMedia Layer core library"
+DESCRIPTION="This is the Simple DirectMedia Layer, a general API that provides
+low level access to audio, keyboard, mouse, joystick, 3D hardware via OpenGL,
+and 2D framebuffer across multiple platforms."
 HOMEPAGE="http://www.libsdl.org/"
-SRC_URI="http://www.libsdl.org/release/${P}.tar.gz"
+SRC_URI="http://www.libsdl.org/release/SDL-${VERSION}.tar.gz"
 PATCH_URI="
-	mirror://portage/media-libs/libsdl/files/libsdl-1.2.13-sdl-config.patch
+	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.10-GrabNotViewable.patch
+	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.15-x11-Bypass-SetGammaRamp-when-changing-gamma.patch
+	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.15-const_XData32.patch
+	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.15-add_sdl_config_man.patch
 	1.2.14-autoconf.patch
 	1.2.14-cygwin.patch
 "
 
-PKG_NAMES="${PN} libSDL1.2_0 libSDL-devel"
+PKG_NAMES="libSDL1.2_0 libSDL-devel"
+libSDL1_2_0_REQUIRES="libGL1 libX11_6 libXext6 libXrandr2 libXrender1"
 libSDL1_2_0_CONTENTS="usr/bin/cygSDL-1-2-0.dll usr/share/doc/"
 libSDL_devel_CONTENTS="usr/bin/sdl-config usr/include/ usr/lib/
-                       usr/share/aclocal/ usr/share/man/man3/"
+                       usr/share/aclocal/ usr/share/man/"
 
 DISTCLEANFILES="acinclude/l*.m4"
 DIFF_EXCLUDES="SDL_config.h"
