@@ -1,6 +1,6 @@
 NAME="SDL"
 VERSION=1.2.15
-RELEASE=2
+RELEASE=3
 CATEGORY="Libs"
 SUMMARY="Simple DirectMedia Layer core library"
 DESCRIPTION="This is the Simple DirectMedia Layer, a general API that provides
@@ -13,12 +13,14 @@ PATCH_URI="
 	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.15-x11-Bypass-SetGammaRamp-when-changing-gamma.patch
 	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.15-const_XData32.patch
 	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.15-add_sdl_config_man.patch
+	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.15-no-default-backing-store.patch
+	http://pkgs.fedoraproject.org/cgit/SDL.git/plain/SDL-1.2.15-SDL_EnableUNICODE_drops_keyboard_events.patch
 	1.2.14-autoconf.patch
-	1.2.14-cygwin.patch
+	1.2.15-cygwin.patch
 "
 
 PKG_NAMES="libSDL1.2_0 libSDL-devel"
-libSDL1_2_0_REQUIRES="libGL1 libX11_6 libXext6 libXrandr2 libXrender1"
+libSDL1_2_0_REQUIRES="libGL1 libX11_6 libXext6 libXrandr2 libXrender1" # libpulse0 libpulse-simple0
 libSDL1_2_0_CONTENTS="usr/bin/cygSDL-1-2-0.dll usr/share/doc/"
 libSDL_devel_CONTENTS="usr/bin/sdl-config usr/include/ usr/lib/
                        usr/share/aclocal/ usr/share/man/"
@@ -34,9 +36,9 @@ CYGCONF_ARGS="
 	--enable-sdl-dlopen
 
 	--disable-arts
-	--disable-esd
+	--enable-esd
 	--enable-nas
-	--enable-oss
+	--disable-oss
 	--enable-pulseaudio
 
 	--disable-dga
@@ -55,7 +57,7 @@ CYGCONF_ARGS="
 	--disable-video-x11-xv
 
 	--disable-arts-shared
-	--disable-esd-shared
+	--enable-esd-shared
 	--enable-nas-shared
 	--enable-pulseaudio-shared
 	--enable-x11-shared
